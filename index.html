@@ -19,11 +19,11 @@
       box-shadow:0 12px 40px rgba(0,0,0,.12);
       overflow:hidden;
     }
-    h1{ margin:0 0 8px; font-size:32px; }
-    p{ margin:0 0 16px; opacity:.8; }
+    h1{ margin:0 0 12px; font-size:32px; }
+    p{ margin:0 0 18px; font-size:18px; }
     .buttons{
       position:relative;
-      height:140px; /* gives room for the runaway button */
+      height:140px;
       display:flex; align-items:center; justify-content:center;
       gap:14px; flex-wrap:wrap;
       margin-top:8px;
@@ -39,7 +39,7 @@
     .yes{ background:var(--pink); color:#fff; }
     .no{
       background:var(--soft); color:#3a0b1d;
-      position:absolute; /* lets it move */
+      position:absolute;
       left:50%; top:72%;
       transform:translate(-50%,-50%);
     }
@@ -47,7 +47,6 @@
       margin-top:16px; font-size:18px; line-height:1.45;
       min-height:54px;
     }
-    .tiny{ font-size:13px; opacity:.6; margin-top:10px; }
 
     @media (prefers-reduced-motion: reduce){
       .no{ position:static; transform:none; }
@@ -56,9 +55,9 @@
   </style>
 </head>
 <body>
-  <div class="card" id="card">
+  <div class="card">
     <h1>Important question, mommy 😌💘</h1>
-    <p>No pressure… but I did make a whole website so it’s kinda serious 😭</p>
+    <p>Would you like to be my Valentine?</p>
 
     <div class="buttons" id="arena">
       <button class="yes" id="yesBtn">Yes 💖</button>
@@ -66,7 +65,6 @@
     </div>
 
     <div class="msg" id="msg"></div>
-    <div class="tiny">If you try to press “No”… good luck 😭</div>
   </div>
 
   <script>
@@ -78,14 +76,12 @@
     let dodges = 0;
 
     function moveNoButton() {
-      // If user prefers reduced motion, don't be annoying.
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
       const arenaRect = arena.getBoundingClientRect();
       const btnRect = noBtn.getBoundingClientRect();
-
-      // Keep the button inside the arena with padding
       const pad = 12;
+
       const maxX = arenaRect.width - btnRect.width - pad;
       const maxY = arenaRect.height - btnRect.height - pad;
 
@@ -97,31 +93,25 @@
       noBtn.style.transform = "translate(-50%, -50%)";
 
       dodges++;
-
-      if (dodges === 3) msg.textContent = "LMAO stop trying 😭 just press yes.";
-      if (dodges === 6) msg.textContent = "Okay mommy… you’re determined 😂";
-      if (dodges >= 9) msg.textContent = "At this point it’s basically a yes 😌💘";
+      if (dodges === 3) msg.textContent = "LMAO 😭";
+      if (dodges === 6) msg.textContent = "Okay okay 😌";
+      if (dodges >= 9) msg.textContent = "At this point it’s basically a yes 💘";
     }
 
-    // Desktop: runs away on hover
     noBtn.addEventListener("mouseenter", moveNoButton);
-
-    // Mobile: runs away when you try to tap it
     noBtn.addEventListener("touchstart", (e) => {
       e.preventDefault();
       moveNoButton();
     }, { passive: false });
 
-    // If she somehow clicks it (rare), tease and still keep it cute
     noBtn.addEventListener("click", () => {
-      msg.textContent = "Nice try 😭 (but I’m still asking) — will you be my Valentine?";
       moveNoButton();
     });
 
     yesBtn.addEventListener("click", () => {
       arena.innerHTML = "";
       msg.innerHTML = "<strong>YAYYY 😭💘</strong><br/>Okay mommy… it’s official. You’re my Valentine 😌";
-      // mini hearts
+
       for (let i = 0; i < 26; i++) {
         const s = document.createElement("span");
         s.textContent = ["💖","💘","💗","💕","🌹"][Math.floor(Math.random()*5)];
@@ -139,7 +129,6 @@
       }
     });
 
-    // Start with a small dodge so it feels “alive”
     setTimeout(moveNoButton, 500);
   </script>
 </body>
