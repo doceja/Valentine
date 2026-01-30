@@ -93,9 +93,16 @@
       noBtn.style.transform = "translate(-50%, -50%)";
 
       dodges++;
-      if (dodges === 3) msg.textContent = "LMAO 😭";
-      if (dodges === 6) msg.textContent = "Okay okay 😌";
-      if (dodges >= 9) msg.textContent = "At this point it’s basically a yes 💘";
+      if (dodges === 3)  msg.textContent = "LMAO";
+      if (dodges === 6)  msg.textContent = "Okay okay 😌";
+      if (dodges === 9)  msg.textContent = "At this point it’s basically a yes";
+      if (dodges === 12) msg.textContent = "Be serious 😭 just press yes";
+      if (dodges === 15) msg.textContent = "Mommy pls 😌";
+      if (dodges === 18) msg.textContent = "Why are you like this 😭";
+      if (dodges === 25) msg.textContent = "Okay this is impressive ngl";
+      if (dodges === 35) msg.textContent = "This level of commitment deserves a yes";
+      if (dodges === 50) msg.textContent = "Alright… you win. But it’s still a yes 😌💘";
+
     }
 
     noBtn.addEventListener("mouseenter", moveNoButton);
